@@ -1,7 +1,7 @@
 {
     "name": "Meu App - Lista de Tarefas",
     "short_name": "Lista",
-    "start_url": "index.html",
+    "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#2e8b57",
@@ -18,3 +18,4 @@
       }
     ]
   }
+  
