@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Meu App - Lista de Tarefas</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icon-192.png">
-  <meta name="theme-color" content="#2e8b57">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="icon-192.png" />
+  <meta name="theme-color" content="#2e8b57" />
 
+  <!-- Manifest será adicionado dinamicamente -->
+  <script>
+    const pathPrefix = window.location.pathname.includes('meuapp') ? '/meuapp/' : '/';
+    const manifest = document.createElement('link');
+    manifest.rel = 'manifest';
+    manifest.href = pathPrefix + 'manifest.json';
+    document.head.appendChild(manifest);
+  </script>
 </head>
 <body>
   <div class="app-container">
     <h1>📋 Lista de Tarefas</h1>
     <div class="input-container">
-      <input type="text" id="nova-tarefa" placeholder="Digite uma tarefa...">
+      <input type="text" id="nova-tarefa" placeholder="Digite uma tarefa..." />
       <button onclick="adicionarTarefa()">Adicionar</button>
     </div>
     <ul id="lista-tarefas"></ul>
@@ -22,12 +29,16 @@
 
   <script src="script.js"></script>
   <script>
+    // Detecta o caminho correto para o service worker
+    const swPath = window.location.pathname.includes('meuapp') 
+      ? '/meuapp/service-worker.js' 
+      : '/service-worker.js';
+
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
+      navigator.serviceWorker.register(swPath)
         .then(() => console.log('Service Worker registrado com sucesso'))
         .catch(err => console.log('Erro ao registrar o Service Worker:', err));
     }
   </script>
-  
 </body>
 </html>
